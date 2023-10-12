@@ -38,7 +38,7 @@ export default function SignUp() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/signup",
+        "https://notes-app-4edo.onrender.com/signup",
         {
           ...inputValue,
         },

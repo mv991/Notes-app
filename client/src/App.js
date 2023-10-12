@@ -23,7 +23,7 @@ function App() {
         navigate("/");
       }
       const { data } = await axios.post(
-        "http://localhost:8000/",
+        "https://notes-app-4edo.onrender.com/",
         {},
         { withCredentials: true }
       );
@@ -42,7 +42,7 @@ function App() {
      useEffect( () => {
       const getData = async() => {
       const { data } = await axios.get(
-        "http://localhost:8000/notes",
+        "https://notes-app-4edo.onrender.com/notes",
         { withCredentials: true }
       );
         setNotes(data);
@@ -56,7 +56,7 @@ function App() {
   };
   async function addNote(note) {
         await axios.post(
-        "http://localhost:8000/note",
+        "https://notes-app-4edo.onrender.com/note",
        { data: {  note, user}},
         
         { withCredentials: true }
@@ -71,7 +71,7 @@ function App() {
       });
     });
     await axios.delete(
-      `http://localhost:8000/note/${noteId}`,
+      `https://notes-app-4edo.onrender.com/note/${noteId}`,
         { withCredentials: true }
       )
       .catch(e =>  toast.error(e.response.data.message, { position: "bottom-left" }))
@@ -86,7 +86,7 @@ function App() {
        })
       setNotes(newNotes);
     await axios.put(
-      `http://localhost:8000/note/${noteId}`,
+      `https://notes-app-4edo.onrender.com/note/${noteId}`,
          {title,content},
         { withCredentials: true }
       )
