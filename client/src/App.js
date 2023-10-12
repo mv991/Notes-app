@@ -34,18 +34,19 @@ function App() {
         ? toast(`Hello ${user.firstName}`, {
             position: "top-right",
           })
-        : (removeCookie("token"), navigate("/login"));
+        : (removeCookie("token"), navigate("/"));
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 
      useEffect( () => {
       const getData = async() => {
-      const { data } = await axios.get(
+        await axios.get(
         "https://notes-app-4edo.onrender.com/notes",
         { withCredentials: true }
-      );
-        setNotes(data);
+      ).then(res => setNotes(res.data))
+       .catch(e => console.log(e))
+        
       }
     getData();
  
@@ -90,16 +91,14 @@ function App() {
          {title,content},
         { withCredentials: true }
       )
-      .catch(e =>  toast.error(e.response.data.message, { position: "bottom-left" }))
-    
-
-  
+      .catch(e =>  toast.error(e.response.data.message, { position: "bottom-left" })) 
   }
+  console.log(notes)
   return (
     <div className="App">
        <Header user={user.firstName} logout={Logout} onAdd={addNote}/>
       <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
+      {/* {notes?.map((noteItem, index) => {
         return (
           <Note
             key={index}
@@ -110,7 +109,7 @@ function App() {
             editNote={editNote}
           />
         );
-      })}
+      })} */}
       <div className="mobile-add-button" >
           <Fab sx={{position:"absolute", bottom:"20px", right: "15px",backgroundColor:"#f5ba13", color:"white",":hover":{bgcolor: "#d69f08"}}} onClick={() => setModalShow(true)} size="small" >
             <AddIcon />
