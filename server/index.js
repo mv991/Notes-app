@@ -137,13 +137,13 @@ app.delete("/note/:noteId",async(req,res) => {
          return res.status(500).json({message:"internal server error"});
      }
 })
-const PORT = 8000;
+
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+    app.listen(PORT, () => console.log(`Server Port: ${process.env.PORT}`));
   })
   .catch((error) => console.log(`${error} did not connect`));
